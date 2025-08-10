@@ -29,12 +29,12 @@ Make sure you have installed:
 - Node.js (LTS version recommended)
 - Angular CLI (`npm install -g @angular/cli`)
 
----
 
 ### 2. Clone the Repository
-```bash
+bash
 git clone https://github.com/<your-username>/<your-repo>.git
 cd <your-repo>
+
 3. Build the Angular Frontend
 bash
 Copy
