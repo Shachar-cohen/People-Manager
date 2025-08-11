@@ -1,4 +1,3 @@
-
 // client-side validation, and calling the PeopleService (CRUD).
 
 import { Component } from '@angular/core';
@@ -7,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PeopleService } from './services/people.service';
 import { Person } from './models/person';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,15 +14,16 @@ import { Person } from './models/person';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
+  
 export class App {
 
-  // Login state
+  
   loginVisible = true;
   username = '';
   password = '';
   loginError = '';
 
-  // View state
+
   addPeopleVisible = false;
   deletePeopleVisible = false;
   showPeopleVisible = false;
@@ -57,7 +58,7 @@ export class App {
 
   constructor(private peopleService: PeopleService) {}
 
-  // Login
+  
   login(): void {
     if (this.username === 'admin' && this.password === '1234') {
       this.loginVisible = false;
@@ -83,9 +84,9 @@ export class App {
     this.searchTerm = '';
     this.editMode = false;
 
-    // do not clear lastDeletedPerson here; we want the user to be able to press Undo
   }
 
+  
   private loadPeople(): void {
     this.peopleService.getPeople().subscribe({
       next: data => this.people = data ?? [],
@@ -93,31 +94,35 @@ export class App {
     });
   }
 
+  
   AddPeople(): void {
     this.clearAll();
     this.addPeopleVisible = true;
     this.loadPeople();
   }
 
+  
   DeletePeople(): void {
     this.clearAll();
     this.deletePeopleVisible = true;
     this.loadPeople();
   }
 
+  
   ShowPeople(): void {
     this.clearAll();
     this.showPeopleVisible = true;
     this.loadPeople();
   }
 
+  
   UpdatePeople(): void {
     this.clearAll();
     this.updatePeopleVisible = true;
     this.loadPeople();
   }
 
-  // Add
+  
   PeopleSubmit(): void {
     if (!this.firstName.trim() || !this.lastName.trim() || !this.personId.trim() ||
         !this.email.trim() || !this.phone.trim()) {
@@ -147,6 +152,7 @@ export class App {
       this.addStatusMessage = 'Phone number already exists—please enter a different one.'; return;
     }
 
+    
     const person: Person = {
       id: this.personId,
       firstName: this.firstName,
@@ -171,6 +177,7 @@ export class App {
     });
   }
 
+  
   private clearAddForm(): void {
     this.firstName = '';
     this.lastName = '';
@@ -179,7 +186,8 @@ export class App {
     this.phone = '';
   }
 
-  // Delete
+  
+
   askDelete(person: Person): void {
     this.deletionMessage = '';
     this.candidateToDelete = person;
@@ -213,7 +221,8 @@ export class App {
     });
   }
 
-  // Undo last delete
+  
+
   undoLastDelete(): void {
     if (!this.lastDeletedPerson) return;
 
@@ -232,12 +241,13 @@ export class App {
     });
   }
 
+  
   cancelDelete(): void {
     this.confirmDeleteVisible = false;
     this.candidateToDelete = null;
   }
 
-  // Update
+  
   editPerson(person: Person): void {
     this.selectedPersonId = person.id;
     this.firstName = person.firstName;
@@ -247,6 +257,7 @@ export class App {
     this.editMode = true;
   }
 
+  
   submitUpdate(): void {
     if (!this.selectedPersonId) return;
 
@@ -273,7 +284,8 @@ export class App {
     });
   }
 
-  // Filter
+
+  
   getFilteredPeople(): Person[] {
     if (!this.searchTerm) return this.people;
     const term = this.searchTerm.toLowerCase();
@@ -282,5 +294,6 @@ export class App {
     );
   }
 }
+
 
 
