@@ -1,4 +1,4 @@
-// handles login screen, view switching (add/delete/update/show),
+
 // client-side validation, and calling the PeopleService (CRUD).
 
 import { Component } from '@angular/core';
@@ -282,4 +282,5 @@ export class App {
     );
   }
 }
+
 
